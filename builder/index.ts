@@ -18,7 +18,7 @@ class Car {
 interface Builder {
   reset(): void;
   setSeats(numberOfSeats: number): void;
-  setEngine(engine: string): void;
+  setFuel(fuel: string): void;
   hasGPS(): void;
 }
 
@@ -34,15 +34,15 @@ class CarBuilder implements Builder {
   }
 
   setSeats(numberOfSeats: number): void {
-    this.car.parts.push(`car has ${numberOfSeats} seats`);
+    this.car.parts.push(`- has ${numberOfSeats} seats`);
   }
 
-  setEngine(engine: string): void {
-    this.car.parts.push(`car has ${engine} engine`);
+  setFuel(fuel: string): void {
+    this.car.parts.push(`- uses ${fuel}`);
   }
 
   hasGPS(): void {
-    this.car.parts.push(`car has GPS system`);
+    this.car.parts.push(`- has GPS system`);
   }
 
   getCar(): Car {
@@ -66,12 +66,12 @@ class Director {
 
   createBasicCar(): void {
     this.builder.setSeats(4);
-    this.builder.setEngine("Oil");
+    this.builder.setFuel("Oil");
   }
 
   createModernCar(): void {
     this.builder.setSeats(4);
-    this.builder.setEngine("Gas");
+    this.builder.setFuel("Gas");
     this.builder.hasGPS();
   }
 }
@@ -82,7 +82,7 @@ const carDirector = new Director(carBuilder);
 
 console.log("------------------------------------------------");
 carDirector.createBasicCar();
-console.log("basic car has below parts: ");
+console.log("basic car: ");
 carBuilder
   .getCar()
   .listParts()
@@ -98,7 +98,7 @@ console.log("");
 
 console.log("------------------------------------------------");
 carDirector.createModernCar();
-console.log("modern car has below parts: ");
+console.log("modern car: ");
 carBuilder
   .getCar()
   .listParts()
